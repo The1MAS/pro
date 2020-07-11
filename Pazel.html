@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>memo cards</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    .container{
+
+
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+    }
+    .container>.innerContainer{
+
+        width: 580px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .container>.innerContainer>div{
+
+width: 120px;
+height: 120px;
+margin-bottom: 30px;
+background-color:tomato;
+display: flex;
+justify-content: center;
+align-items: center;
+color: white;
+font-size: 80px;
+font-family: impact;
+position: relative;
+overflow: hidden;
+}
+.container>.innerContainer>div::before{
+
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color:orange;
+transition: 500ms;
+
+}
+.container>.innerContainer>div.selected::before{
+
+    transform: translateY(-100%);
+
+}
+    </style>
+
+</head>
+<body>
+    <div class="container">
+   <div class="innerContainer">
+    <div class="hidden" data-value="1">1</div>
+    <div class="hidden" data-value="4">4</div>
+    <div class="hidden"  data-value="3">3</div>
+    <div class="hidden"  data-value="4">4</div>
+    <div class="hidden"  data-value="2">2</div>
+    <div class="hidden" data-value="1">1</div>
+    <div class="hidden"  data-value="3">3</div>
+    <div class="hidden"  data-value="2">2</div>
+   </div>
+    </div>
+<script>
+
+const elements={
+
+    cards:document.querySelectorAll(".innerContainer>div"),
+    hiddenCards:document.querySelectorAll(".hidden")
+
+
+}
+let counter=0;
+let clickedItemsValue=[];
+for(let i =0 ; i <elements.cards.length;i++){
+
+    elements.cards[i].onclick=function(){
+        counter++;
+        // console.log(this.dataset.value)
+clickedItemsValue.push(this.dataset.value);
+
+if(counter==2 && (clickedItemsValue[0]===clickedItemsValue[1])){
+
+alert("found");
+elements.hiddenCards[0].classList.remove("hidden");
+elements.hiddenCards[1].classList.remove("hidden");
+
+}
+
+        // 
+        if(counter>2){
+            
+            for(let i = 0; i<elements.hiddenCards.length;i++){
+                
+                elements.cards[i].classList.remove("selected");
+                
+                
+            }
+            counter=1;
+            clickedItemsValue=[];
+        }
+        this.classList.add("selected")
+            
+    }
+
+
+}
+setTimeout(function(){
+
+    for(let i = 0 ;i <elements.cards.length;i++){
+
+        elements.cards[i].classList.add("selected");
+
+
+    }
+
+
+},1000)
+setTimeout(function(){
+
+for(let i = 0 ;i <elements.cards.length;i++){
+
+    elements.cards[i].classList.remove("selected");
+
+
+}
+
+
+},3000)
+</script>
+
+
+</body>
+</html>

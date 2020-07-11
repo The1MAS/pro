@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+   <style>
+    
+     *{
+    margin: 0;
+    padding: 0;
+         box-sizing: border-box;
+       }
+       .slide{
+           
+           width: 100%;
+           height: 100vh;
+             background: url(img/leaves_form_plant_green_90012_1920x1080.jpg) center center / cover no-repeat fixed;
+       }
+       .slide::before{
+           content:"";
+           display: block;
+           width: 100%;
+           height: 100%;
+           position: absolute;
+           top: 0;
+           left: 0;
+           background: inherit;
+/*           filter:grayscale(100%);*/
+       }
+       .circle{
+           width: 50%;
+           height: 50%;
+        
+           position: absolute;
+           top: 0%;
+           left:0%;
+           transition: 1s;
+/*           filter: blur(5px);*/
+           border: 10px solid rgba(255,255,255,0.5);
+           background: inherit;
+       }
+       .circle::before{
+           
+           content: "";
+           display: block;
+           width: 100%;
+           height: 100%;
+              background: inherit;
+           filter: blur(10px);
+       }
+       .col{
+           width: 50%;
+           height: 50%;
+           float: left;
+           position: relative;
+           z-index: 10;
+           
+       }
+       #col1:hover~.circle{
+           
+           left: 0;
+           top: 0;
+       }
+       #col2:hover~.circle{
+           
+           left: 50%;
+           top: 0;
+       }
+       #col3:hover~.circle{
+           
+           left: 0;
+           top: 50%;
+       }
+       #col4:hover~.circle{
+           
+           left: 50%;
+           top: 50%;
+       }
+       input{
+           position: fixed;
+           top: 0;
+           left: 0;
+           z-index: 1000;
+       }
+       input:checked+.slide{
+           background: url(img/chiron-1024x480.jpg) center center / cover no-repeat fixed; 
+       }
+    </style>
+    
+</head>
+<body>
+   <input type="checkbox">
+    <div class="slide">
+        <div class="col" id="col1"></div>
+        <div class="col" id="col2"></div>
+        <div class="col" id="col3"></div>
+        <div class="col" id="col4"></div>
+        <div class="circle"></div>
+    </div>
+</body>
+</html>

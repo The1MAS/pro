@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>review</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .controller{
+
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .controller >div{
+            margin:  0 10px;
+            cursor: pointer;
+            font-family: sans-serif;
+            background-color: orange;
+            padding: 10px;
+            color: white;
+        }
+    
+    div.numberContainer{
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+
+    }
+    div.numberContainer>span{
+        font-size: 100px;
+        font-family: impact;
+    }
+    </style>
+</head>
+<body>
+    <div class="controller">
+        <div class="next">next</div>
+        <div class="prev">prev</div>
+        <div class="pause">pause</div>
+        <div class="play">play</div>
+        <div class="submit">submit</div>
+    </div>
+    <div class="numberContainer">
+        <span>0</span>
+    </div>
+    <script>
+    /*
+    sessionStorage
+    localStorage
+    
+    
+    
+    */ 
+
+
+    /* localStorage:
+    
+    setItem
+    getItem
+    removeItem
+    clear()
+    
+    
+    
+    */
+    const elements={
+        numContainer:document.querySelector(".numberContainer>span"),
+        playBtn:document.querySelector(".play"),
+        prevBtn:document.querySelector(".prev"),
+        pauseBtn:document.querySelector(".pause"),
+        nextBtn:document.querySelector(".next"),
+        submitBtn:document.querySelector(".submit")
+
+    }
+    // console.log(localStorage.getItem("currentNum").split(","))
+    // console.log(localStorage.getItem("currentNum"))
+    
+    const db=[];
+    const {numContainer,playBtn,prevBtn,pauseBtn,nextBtn,submitBtn}=elements;
+    const currentNum=localStorage.getItem("currentNum")===null?0:JSON.parse(localStorage.getItem("currentNum"))[JSON.parse(localStorage.getItem("currentNum")).length - 1];
+    numContainer.innerHTML=currentNum;
+    // numContainer=elements.numContainer
+    // elements.numContainer
+    // numContainer
+
+function next(){
+
+    let currentNumber=Number(numContainer.innerHTML);
+    currentNumber++;
+    numContainer.innerHTML=currentNumber;
+}
+
+function prev(){
+
+let currentNumber=Number(numContainer.innerHTML);
+currentNumber--;
+numContainer.innerHTML=currentNumber;
+}
+function submit(){
+
+      db.push(numContainer.innerHTML);  
+    localStorage.setItem("currentNum",JSON.stringify(db));
+}
+nextBtn.onclick=next;
+prevBtn.onclick=prev;
+submitBtn.onclick=submit;
+
+let numChangeInterval=setInterval(next,300);
+pauseBtn.onclick=function(){
+    clearInterval(numChangeInterval)
+}
+playBtn.onclick=function(){
+    numChangeInterval=setInterval(next,300);
+}
+// window.addEventListener("unload", function(event) { 
+    
+//     alert(123)
+
+//  });
+    </script>
+</body>
+</html>
